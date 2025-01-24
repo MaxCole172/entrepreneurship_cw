@@ -1,0 +1,97 @@
+/* Main Section Styles */
+.animated-bg {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    font-family: Arial, sans-serif;
+    color: white;
+  
+    background: radial-gradient(circle at 10% 20%, #2c3e50, transparent),
+                radial-gradient(circle at 80% 30%, #6a0572, transparent),
+                radial-gradient(circle at 50% 70%, #4b79a1, transparent),
+                radial-gradient(circle at 30% 50%, #34495e, transparent),
+                radial-gradient(circle at 70% 90%, #2c5364, transparent),
+                radial-gradient(circle at 90% 40%, #8e44ad, transparent),
+                radial-gradient(circle at 25% 80%, #ff6b6b, transparent),
+                radial-gradient(circle at 75% 25%, #f9ca24, transparent);
+    background-size: 200% 200%;
+    animation: gradientShift 12s infinite alternate ease-in-out;
+  }
+  
+  .home-left {
+    max-width: 50%;
+  }
+  
+  .name {
+    font-size: 4rem;
+    margin: 0;
+  }
+  
+  .description {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .home-right {
+    max-width: 40%;
+  }
+  
+  .profile-image {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Curve Section */
+  .curve-container {
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1); /* Adds a slight shadow under the curve */
+  }
+  
+  .curve {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Content Section Below */
+  .content-section {
+    padding: 50px 10%;
+    background: white;
+    color: #333;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .content-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .content-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  /* Keyframes for organic gradient movement */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 0%;
+    }
+    25% {
+      background-position: 50% 50%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    75% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
