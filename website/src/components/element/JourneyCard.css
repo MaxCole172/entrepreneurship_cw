@@ -1,0 +1,124 @@
+.journey-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start; /* Align items properly */
+    margin: 100px 0; /* Larger gap between cards */
+    width: 100%;
+    opacity: 0; /* Hidden until animation */
+  }
+  
+  .journey-card.left {
+    flex-direction: row-reverse; /* Milestone on the left, date on the right */
+  }
+  
+  .journey-card.right {
+    flex-direction: row; /* Milestone on the right, date on the left */
+  }
+  
+  .card-content {
+    background: linear-gradient(145deg, #ffffff, #f2f2f2); /* Subtle gradient */
+    padding: 50px; /* Larger padding for bigger cards */
+    border-radius: 20px; /* Softer corners */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Modern shadow */
+    max-width: 65%; /* Increased card width */
+    min-width: 500px; /* Ensure consistent sizing */
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Spacing between image and text */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 80px; /* Larger gap from the timeline */
+  }
+  
+  .card-content:hover {
+    transform: translateY(-10px) scale(1.05); /* Subtle hover effect */
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2); /* Slightly deeper hover shadow */
+  }
+  
+  .card-image {
+    width: 150px; /* Increased image size */
+    height: 150px;
+    border-radius: 12px; /* Rounded image corners */
+    object-fit: cover;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Image shadow */
+  }
+  
+  .card-title {
+    font-size: 2rem; /* Larger title size */
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+  }
+  
+  .card-description {
+    font-size: 1.3rem; /* Slightly larger description */
+    color: #555;
+    line-height: 1.8; /* Add spacing between lines */
+    margin-top: 10px;
+  }
+  
+  /* Alternate layout for image and text */
+  .journey-card.left .card-content {
+    flex-direction: row-reverse; /* Image on the left, text on the right */
+  }
+  
+  .journey-card.right .card-content {
+    flex-direction: row; /* Image on the right, text on the left */
+  }
+  
+  .card-date {
+    font-size: 1.5rem; /* Increased font size for emphasis */
+    font-weight: bold;
+    color: #333; /* Ensure strong contrast */
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: max-content; /* Ensure date width fits the text */
+  }
+  
+  .journey-card.left .card-date {
+    left: calc(50% + 80px); /* Increased gap for date on the right side */
+  }
+  
+  .journey-card.right .card-date {
+    right: calc(50% + 80px); /* Increased gap for date on the left side */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .journey-card {
+      flex-direction: column; /* Stack cards vertically */
+      align-items: center;
+      text-align: center;
+    }
+  
+    .card-content {
+      max-width: 90%; /* Increase width for smaller screens */
+      flex-direction: column; /* Stack image and text */
+      padding: 30px; /* Adjust padding for smaller screens */
+      margin: 0; /* Remove timeline gap for stacked layout */
+      gap: 20px; /* Reduce spacing between image and text */
+    }
+  
+    .card-title {
+      font-size: 1.6rem; /* Adjust title size for smaller screens */
+    }
+  
+    .card-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+  
+    .card-image {
+      width: 120px; /* Adjust image size for smaller screens */
+      height: 120px;
+    }
+  
+    .card-date {
+      position: relative;
+      top: auto;
+      transform: none; /* Remove vertical centring for stacking */
+      margin-top: 20px;
+    }
+  }
