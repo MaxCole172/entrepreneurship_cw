@@ -1,12 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Ensure you have react-router-dom installed and set up
 import Wavify from "react-wavify";
-import JourneyCard from "./element/JourneyCard"; // Existing component (if still needed)
-import SimulationScene from "./three-js-components/SimulationScene"; // Our new three.js scene
+import SimulationScene from "./three-js-components/SimulationScene";
 import "./Home.css";
 
 const Home = () => {
   return (
     <div>
+      {/* Navigation Bar */}
+      <nav className="navbar">
+        <ul>
+          <li>
+            <Link to="/futurework">Future work</Link>
+          </li>
+        </ul>
+      </nav>
+
       {/* Top Section */}
       <div className="animated-bg home-container">
         <div className="home-left">
