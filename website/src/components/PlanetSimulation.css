@@ -1,0 +1,26 @@
+.hover-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  .planet-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .planet-info input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+  }
