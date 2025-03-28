@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.app-container {
+  min-height: 100vh;
+  position: relative;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

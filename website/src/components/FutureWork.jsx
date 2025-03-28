@@ -22,17 +22,6 @@ const FutureWork = () => {
 
   return (
     <div className="future-work-container">
-      <nav className="navbar">
-        <div className="nav-content">
-          <div className="nav-logo">MG</div>
-          <div className="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </div>
-      </nav>
-
       <header className="header">
         <h1 data-text="Max's Entrepreneurial Galaxy">Max's Entrepreneurial Galaxy</h1>
       </header>

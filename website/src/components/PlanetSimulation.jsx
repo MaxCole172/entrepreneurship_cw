@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './FutureWork.css';
 import './PlanetSimulation.css';
 
@@ -16,8 +17,19 @@ const SolarSystemSimulation = () => {
   const planetsRef = useRef([]);
   const [planetNotes, setPlanetNotes] = useState({});
   const originalScalesRef = useRef({});
+  const controlsRef = useRef(null);
+  const animationFramesRef = useRef([]); // Add this line to track animation frames
+
+  // Add this function to track and cleanup animation frames
+  const trackAnimationFrame = (frameId) => {
+    animationFramesRef.current.push(frameId);
+    return frameId;
+  };
 
   useEffect(() => {
+    // Reset animation frames array when component mounts
+    animationFramesRef.current = [];
+    
     const width = mountRef.current.clientWidth;
     const height = mountRef.current.clientHeight;
 
@@ -223,10 +235,17 @@ const SolarSystemSimulation = () => {
     };
     window.addEventListener("mousemove", onMouseMove);
 
+    // Add OrbitControls
+    controlsRef.current = new OrbitControls(camera, renderer.domElement);
+    controlsRef.current.enableDamping = true;
+    controlsRef.current.dampingFactor = 0.25;
+    controlsRef.current.enableZoom = true;
+
     // --- Animation Loop ---
     const clock = new THREE.Clock();
     const animate = () => {
-      requestRef.current = requestAnimationFrame(animate);
+      // Store animation frame ID in ref
+      requestRef.current = trackAnimationFrame(requestAnimationFrame(animate));
       const elapsedTime = clock.getElapsedTime();
 
       if (planetsRef.current.length > 0) {
@@ -273,6 +292,7 @@ const SolarSystemSimulation = () => {
         setHoveredPlanet(null);
       }
 
+      controlsRef.current.update();
       renderer.render(scene, camera);
     };
     animate();
@@ -280,33 +300,45 @@ const SolarSystemSimulation = () => {
     // --- Cleanup ---
     return () => {
       cancelAnimationFrame(requestRef.current);
-      window.removeEventListener("mousemove", onMouseMove);
-      mountRef.current.removeChild(renderer.domElement);
+      
+      // Safely remove event listener
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("mousemove", onMouseMove);
+      }
+      
+      // Safely remove renderer DOM element
+      if (mountRef.current && renderer.domElement) {
+        if (mountRef.current.contains(renderer.domElement)) {
+          mountRef.current.removeChild(renderer.domElement);
+        }
+      }
+      
+      // Dispose of controls if they exist
+      if (controlsRef.current) {
+        controlsRef.current.dispose();
+      }
+      
+      // Dispose of geometries, materials, textures
+      scene.traverse((object) => {
+        if (object.geometry) {
+          object.geometry.dispose();
+        }
+        
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      });
+      
+      // Clear references
+      planetsRef.current = [];
     };
   }, []);
 
-  return (
-    <div className="simulation-wrapper" ref={mountRef}>
-      {hoveredPlanet && (
-        <div className="hover-overlay">
-          <div className="planet-info">
-            <h3>{hoveredPlanet.name}</h3>
-            <input
-              type="text"
-              placeholder="Add notes about this planet..."
-              value={planetNotes[hoveredPlanet.name] || ''}
-              onChange={(e) => {
-                setPlanetNotes(prev => ({
-                  ...prev,
-                  [hoveredPlanet.name]: e.target.value
-                }));
-              }}
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  return <div className="simulation-wrapper" ref={mountRef} />;
 };
 
 const PlanetSimulation = ({ selectedPlanet }) => {
@@ -315,12 +347,23 @@ const PlanetSimulation = ({ selectedPlanet }) => {
   const isPausedRef = useRef(false);
   const requestRef = useRef();
   const originalScalesRef = useRef({});
-  const clockRef = useRef(new THREE.Clock()); // Add clock ref
+  const clockRef = useRef(new THREE.Clock());
   const rendererRef = useRef(null);
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
+  const controlsRef = useRef(null);
+  const animationFramesRef = useRef([]); // Store all animation frame IDs
+
+  // Add this function to track and cleanup animation frames
+  const trackAnimationFrame = (frameId) => {
+    animationFramesRef.current.push(frameId);
+    return frameId;
+  };
 
   useEffect(() => {
+    // Reset animation frames array when component mounts
+    animationFramesRef.current = [];
+    
     const width = mountRef.current.clientWidth;
     const height = mountRef.current.clientHeight;
 
@@ -515,9 +558,16 @@ const PlanetSimulation = ({ selectedPlanet }) => {
       );
     });
 
+    // Add OrbitControls
+    controlsRef.current = new OrbitControls(cameraRef.current, rendererRef.current.domElement);
+    controlsRef.current.enableDamping = true;
+    controlsRef.current.dampingFactor = 0.25;
+    controlsRef.current.enableZoom = true;
+
     // --- Animation Loop ---
     const animate = () => {
-      requestRef.current = requestAnimationFrame(animate);
+      // Store animation frame ID in ref
+      requestRef.current = trackAnimationFrame(requestAnimationFrame(animate));
       const elapsedTime = clockRef.current.getElapsedTime();
 
       if (planetsRef.current.length > 0) {
@@ -532,14 +582,56 @@ const PlanetSimulation = ({ selectedPlanet }) => {
         });
       }
 
+      controlsRef.current.update();
       rendererRef.current.render(sceneRef.current, cameraRef.current);
     };
     animate();
 
-    // Cleanup
+    // Update the cleanup function
     return () => {
-      cancelAnimationFrame(requestRef.current);
-      mountRef.current.removeChild(rendererRef.current.domElement);
+      // Cancel any ongoing animation frames
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+      
+      // Cancel all tracked animation frames
+      animationFramesRef.current.forEach(frameId => {
+        cancelAnimationFrame(frameId);
+      });
+      
+      // Clean up Three.js resources
+      if (rendererRef.current && mountRef.current) {
+        // Safe check to ensure the renderer.domElement still exists in the DOM
+        if (mountRef.current.contains(rendererRef.current.domElement)) {
+          mountRef.current.removeChild(rendererRef.current.domElement);
+        }
+      }
+      
+      // Dispose of geometries, materials, textures
+      if (sceneRef.current) {
+        sceneRef.current.traverse((object) => {
+          if (object.geometry) {
+            object.geometry.dispose();
+          }
+          
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach(material => material.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        });
+      }
+      
+      // Clear references
+      planetsRef.current = [];
+      originalScalesRef.current = {};
+      
+      // Dispose of controls if they exist
+      if (controlsRef.current) {
+        controlsRef.current.dispose();
+      }
     };
   }, []);
 
@@ -578,7 +670,7 @@ const PlanetSimulation = ({ selectedPlanet }) => {
             planet.orbit.position.y = currentY;
 
             if (progress < 1) {
-              requestAnimationFrame(animateTransform);
+              trackAnimationFrame(requestAnimationFrame(animateTransform));
             }
           };
 
@@ -612,7 +704,7 @@ const PlanetSimulation = ({ selectedPlanet }) => {
             planet.orbit.position.y = currentY;
 
             if (progress < 1) {
-              requestAnimationFrame(animateBack);
+              trackAnimationFrame(requestAnimationFrame(animateBack));
             }
           };
 
@@ -650,7 +742,7 @@ const PlanetSimulation = ({ selectedPlanet }) => {
           planet.orbit.position.y = currentY;
 
           if (progress < 1) {
-            requestAnimationFrame(animateReset);
+            trackAnimationFrame(requestAnimationFrame(animateReset));
           }
         };
 
@@ -665,15 +757,7 @@ const PlanetSimulation = ({ selectedPlanet }) => {
     }
   }, [selectedPlanet]);
 
-  return (
-    <div className="simulation-wrapper" ref={mountRef}>
-      {selectedPlanet && (
-        <div className="planet-label">
-          <h2>{selectedPlanet}</h2>
-        </div>
-      )}
-    </div>
-  );
+  return <div className="simulation-wrapper" ref={mountRef} />;
 };
 
 export default PlanetSimulation;

@@ -2,46 +2,16 @@
   min-height: 100vh;
   background: #000;
   color: white;
+  padding-top: 100px; /* Increase padding to make room for the navbar */
 }
 
-.navbar {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.nav-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-}
-
-.nav-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 2rem;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #64b5f6;
-}
+/* Comment out old navbar styles if they exist */
+/* .navbar {
+  ...
+} */
 
 .header {
-  padding: 6rem 2rem 2rem;
+  padding: 2rem 2rem 2rem;
   text-align: center;
   position: relative;
 }

@@ -7,6 +7,7 @@
   padding: 0 5%;
   font-family: Arial, sans-serif;
   color: white;
+  padding-top: 100px; /* Increase padding to make room for the navbar */
 
   background: radial-gradient(circle at 10% 20%, #2c3e50, transparent),
               radial-gradient(circle at 80% 30%, #6a0572, transparent),
@@ -19,6 +20,11 @@
   background-size: 200% 200%;
   animation: gradientShift 12s infinite alternate ease-in-out;
 }
+
+/* Remove the old navbar hiding styles */
+/* .navbar {
+  display: none;
+} */
 
 .home-left {
   max-width: 50%;
