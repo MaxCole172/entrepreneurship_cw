@@ -1,13 +1,13 @@
 import React from 'react';
 import PlanetSimulation from './PlanetSimulation';
-import './FutureWork.css';
+import './NextSteps.css';
 
-const FutureWork = () => {
+const NextSteps = () => {
   const [selectedPlanet, setSelectedPlanet] = React.useState(null);
   const [openPlanet, setOpenPlanet] = React.useState(null);
 
   const planetData = [
-    { name: "Mercury", message: "Future work on orbital mechanics and planetary physics" },
+    { name: "Mercury", message: "Next steps on orbital mechanics and planetary physics" },
     { name: "Venus", message: "Developing advanced atmospheric simulation systems" },
     { name: "Earth", message: "Implementing realistic weather patterns and seasonal changes" },
     { name: "Mars", message: "Creating terraforming visualization tools" },
@@ -21,7 +21,7 @@ const FutureWork = () => {
   };
 
   return (
-    <div className="future-work-container">
+    <div className="next-steps-container">
       <header className="header">
         <h1 data-text="Max's Entrepreneurial Galaxy">Max's Entrepreneurial Galaxy</h1>
       </header>
@@ -57,4 +57,4 @@ const FutureWork = () => {
   );
 };
 
-export default FutureWork;
+export default NextSteps;

@@ -34,8 +34,8 @@ const MainNavbar = () => {
           <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
             Home
           </Link>
-          <Link to="/futurework" className={location.pathname === '/futurework' ? 'active' : ''}>
-            Future Work
+          <Link to="/nextsteps" className={location.pathname === '/nextsteps' ? 'active' : ''}>
+            Next Steps
           </Link>
         </div>
       </div>
