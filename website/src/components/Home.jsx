@@ -62,7 +62,7 @@ const Home = () => {
           <div className="header-image">
             <div className="image-container">
               <img
-                src="https://via.placeholder.com/500"
+                src="./max-cole.jpeg"
                 alt="Max Cole"
                 className="profile-image"
               />

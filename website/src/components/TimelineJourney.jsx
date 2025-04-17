@@ -7,45 +7,38 @@ import { FaLightbulb, FaGraduationCap, FaBriefcase, FaCode, FaChartLine, FaAward
 const milestones = [
   {
     id: 1,
-    year: 2018,
-    title: "Started Computer Science Degree",
-    description: "Began my journey in computer science at the University of Cambridge, focusing on algorithms and data structures.",
+    year: 2021,
+    title: "First Venture",
+    description: " This was the year that I completed my GCSE's, went to college but also embarked on my first real entrepreneurial venture. I worked with a group of other students to develop CookBook which was an at home kitchen assistant that would help users keep track of their ingredients at home and automatically order new stock. This eventually failed but it was my first real introduction to the world of business.",
     icon: FaGraduationCap
   },
   {
     id: 2,
-    year: 2019,
-    title: "First Tech Internship",
-    description: "Worked as a software engineering intern at Google, where I contributed to the development of their cloud infrastructure.",
+    year: 2023,
+    title: "A-Levels and Startups",
+    description: "Completed my A-Levels achieving A*A*A*A* in Maths, Further Maths, Physics and Computer Science. Also at this time I worked on 2 other startups: Brandssy which was a fashion based social media application and Demogroove which was my first main solo venture. Demogroove is an Ai assistant for small businesses that acts as a social media manager and can organise content. This was my first real experience interacting with potential customers.",
     icon: FaBriefcase
   },
   {
     id: 3,
-    year: 2020,
-    title: "Launched First Web App",
-    description: "Created and deployed my first full-stack web application using React and Node.js, gaining practical experience in modern web development.",
+    year: 2024,
+    title: "Iremia",
+    description: "Joined the University of Warwick and started Iremia with my Co-Founder Dan. Iremia is a stress identification software that aims to reduce burnout in the workplace. We went through the Xelerate program and pitched at the Shard in London to VC investors!",
     icon: FaCode
   },
   {
     id: 4,
-    year: 2021,
-    title: "Research Publication",
-    description: "Published research on machine learning algorithms for natural language processing in a peer-reviewed conference.",
+    year: 2024,
+    title: "R3 Internship",
+    description: "This summer, I joined R3 for an internship in Sales Engineering. Over the 11 weeks I learnt so much about the tech industry and how my interest was more in the intersection of business and technology than just in computer science.",
     icon: FaLightbulb
   },
   {
     id: 5,
-    year: 2022,
-    title: "Graduated with First Class Honours",
-    description: "Completed my degree with high academic distinction and received recognition for my final year project on AI-driven analytics.",
+    year: 2025,
+    title: "UBS Summer Internship",
+    description: " I am set to join UBS as a summer intern working in software. I am very excited to see where this opportunity takes me and my next steps!",
     icon: FaAward
-  },
-  {
-    id: 6,
-    year: 2023,
-    title: "Started Tech Startup",
-    description: "Founded a technology startup focused on developing AI solutions for small businesses, securing initial seed funding.",
-    icon: FaChartLine
   }
 ];
 
@@ -137,18 +130,6 @@ const InteractiveTimeline = () => {
   
   return (
     <div ref={timelineRef} className={`interactive-timeline-container ${isVisible ? 'visible' : ''}`}>
-      <div className="wave-connector">
-        <Wave
-          fill="#ffffff"
-          paused={false}
-          options={{
-            height: 15,
-            amplitude: 15,
-            speed: 0.15,
-            points: 4
-          }}
-        />
-      </div>
       
       <div className="timeline-wrapper">
         <div className="timeline-track">

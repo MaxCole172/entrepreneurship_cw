@@ -55,7 +55,7 @@ const SolarSystemSimulation = () => {
     const stars = new THREE.Points(starGeometry, starMaterial);
     scene.add(stars);
 
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
+    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 2000);
     camera.position.set(0, 40, 70);
     camera.lookAt(0, 0, 0);
 
@@ -397,7 +397,7 @@ const PlanetSimulation = ({ selectedPlanet }) => {
     const stars = new THREE.Points(starGeometry, starMaterial);
     sceneRef.current.add(stars);
 
-    cameraRef.current.position.set(0, 40, 70);
+    cameraRef.current.position.set(0, 30, 50);
     cameraRef.current.lookAt(0, 0, 0);
 
     rendererRef.current.setSize(width, height);
@@ -491,7 +491,7 @@ const PlanetSimulation = ({ selectedPlanet }) => {
     const planetData = [
       { name: "Mercury", distance: 12, scale: 1, orbitSpeed: 0.5, selfRotationSpeed: 0.002, message: "Work on orbital mechanics" },
       { name: "Venus", distance: 16, scale: 1, orbitSpeed: 0.4, selfRotationSpeed: 0.0017, message: "Develop new shader techniques" },
-      { name: "Earth", distance: 20, scale: 1, orbitSpeed: 0.3, selfRotationSpeed: 0.0015, message: "Improve simulation realism" },
+      { name: "Earth", distance: 20, scale: 1, orbitSpeed: 0.3, selfRotationSpeed: 0.0015, message: "This is where I am at now, still pursuing my degree in Computer Science with Business Studies. My entrepreneurial experience at the moment is less focussed on one specific venture, but more exploring the possibilities and opportunities that arrise. Making sure that I don't take what I currently have for granted and always leaving room to learn more " },
       { name: "Mars", distance: 24, scale: 1, orbitSpeed: 0.25, selfRotationSpeed: 0.0012, message: "Research atmospheric effects" },
       { name: "Jupiter", distance: 30, scale: 1, orbitSpeed: 0.2, selfRotationSpeed: 0.0007, message: "Study gas giant dynamics" },
       { name: "Neptune", distance: 36, scale: 1, orbitSpeed: 0.05, selfRotationSpeed: 0.0004, message: "Deep dive into outer planets" },
